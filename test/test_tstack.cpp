@@ -68,3 +68,11 @@ TEST(TStack, pop_move_pointer_back) {
 	s.pop();
 	EXPECT_EQ(3, s.top());
 }
+TEST(TStack, can_puch_element_in_full_stack_by_repackaging) {
+	TStack<int> s(2);
+	s.push(2);
+	s.push(4);
+	s.push(6);
+	s.push(8);
+	EXPECT_EQ(8, s.top());
+}

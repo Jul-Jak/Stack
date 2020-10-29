@@ -81,9 +81,16 @@ T TStack<T>::pop() {
 
 template<class T>
 void TStack<T>::push(const T& element) {
-	if (isFull()) throw - 1;
+	if (isFull())
+	{
+		maxsize *= 2.0;
+		T* temp = new int[maxsize];
+		memmove(temp, array, sizeof(array) * size);
+		delete[] array;
+		array = temp;
+	}
 	array[size] = element;
-	size++;
+	size++;;
 }
 
 template<class T>
