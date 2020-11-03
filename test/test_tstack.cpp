@@ -76,3 +76,76 @@ TEST(TStack, can_puch_element_in_full_stack_by_repackaging) {
 	s.push(8);
 	EXPECT_EQ(8, s.top());
 }
+TEST(TQueue, can_create_queue)
+{
+	ASSERT_NO_THROW(TQueue<int>s);
+}
+
+TEST(TQueue, can_push_element_in_queue)
+{
+	TQueue<int> q;
+	ASSERT_NO_THROW(q.push(1));
+}
+
+TEST(TQueue, no_throw_when_push_element_in_full_queue)
+{
+	TQueue<int> q(1);
+	q.push(1);
+	ASSERT_NO_THROW(q.push(2));
+}
+
+TEST(TQueue, can_pop_element_from_queue)
+{
+	TQueue<int> q(5);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	ASSERT_NO_THROW(q.pop());
+}
+
+TEST(TQueue, throws_when_pop_from_empty_queue)
+{
+	TQueue<int> q;
+	ASSERT_ANY_THROW(q.pop());
+}
+
+TEST(TQueue, no_throw_when_many_pushes_and_pops)
+{
+	TQueue<int> q(7);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	q.push(4);
+	q.push(5);
+	q.pop();
+	q.push(6);
+	q.pop();
+	q.push(6);
+	q.push(7);
+	ASSERT_NO_THROW(q.pop());
+}
+
+TEST(TQueue, right_algoritm)
+{
+	TQueue<int> q(3);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	q.pop();
+	q.push(4);
+	q.pop();
+	q.push(8);
+	EXPECT_EQ(8, q[2]);
+}
+
+TEST(TQueue, can_return_element)
+{
+	TQueue<int> q(1);
+	q.push(1);
+	ASSERT_NO_THROW(q[0]);
+}
+
+TEST(TQueue, throws_when_create_queue_with_negative_length)
+{
+	ASSERT_ANY_THROW(TQueue<int> q(-1));
+}
