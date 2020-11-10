@@ -7,9 +7,8 @@ class TStack {
 private:
 	T* array;
 	int maxsize;
-	int size;
-
 public:
+	int size;
 	TStack(int ms = 100); //конструктор с параметром
 	TStack(const TStack& ts); //конструктор копирования
 	~TStack(); //деструктор
@@ -135,21 +134,20 @@ protected:
 		~TQueue() {}
 
 		void pop() {
-			while (!St_1.isEmpty())
-			{
-				St_2.push(St_1.top());
-				St_1.pop();
+			if ((St_1.isEmpty()) && (St_2.isEmpty())) throw "Error!";
+			if (St_2.isEmpty()) {
+				while (!St_1.isEmpty()) {
+					St_2.push(St_1.top()); //дублируем из вершины 1-го стека во 2-ой
+					St_1.pop(); //и удаляем элемент, который дублировали 
+				}
 			}
-			St_2.pop();
-			while (!St_2.isEmpty())
-			{
-				St_1.push(St_2.top());
-				St_2.pop();
-			}
+			St_2.pop(); //удаляем элемент из 2-го стека
+			size--;
 		}
 
 		void push(int n) {
 			St_1.push(n);
+			size++;
 		}
 		
 		bool operator==(const TQueue& q) {
@@ -166,7 +164,12 @@ protected:
 		}
 
 		T operator[](int pos) {
-			if (St_2.isEmpty()) return St_1[pos + start_index];
-			return St_2[pos];
+			if (pos >= size) throw - 1;
+			if (St_2.isEmpty()) return St_1[pos];
+			if (St_1.isEmpty()) return St_2[St_2.size - pos -1];
+			else {
+				if (pos < St_2.size) return St_2[St_2.size - pos - 1];
+				else return St_1[pos - St_2.size];
+			}
 		}
 };
