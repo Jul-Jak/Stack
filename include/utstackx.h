@@ -84,7 +84,7 @@ void TStack<T>::push(const T& element) {
 	if (isFull())
 	{
 		maxsize *= 2.0;
-		T* temp = new int[maxsize];
+		T* temp = new T[maxsize];
 		memmove(temp, array, sizeof(array) * size);
 		delete[] array;
 		array = temp;
