@@ -1,189 +1,151 @@
-#include "utmatrix.h"
+#pragma once
+#include "utstackx.h"
 
-#include <gtest.h>
-
-TEST(TMatrix, can_create_matrix_with_positive_length)
+#include "gtest.h""
+TEST(TStack, can_create_stack_with_positive_size) {
+	ASSERT_NO_THROW(TStack<int> s(100));
+}
+TEST(TStack, throws_when_create_stack_with_negative_size) {
+	ASSERT_ANY_THROW(TStack<int> s(-10));
+}
+TEST(TStack, trows_when_create_stack_with_too_large_size) {
+	ASSERT_ANY_THROW(TStack<int> s(STACK_MAX_SIZE + 1));
+}
+TEST(TStack, can_create_copied_stack) {
+	TStack<int> st1(100);
+	ASSERT_NO_THROW(TStack<int> st2(st1));
+}
+TEST(TStack, copied_stack_is_equal_to_source_one) {
+	TStack<int> st1(100);
+	st1.push(2);
+	TStack<int> st2(st1);
+	EXPECT_EQ(st1.pop(), st2.pop());
+}
+TEST(TStack, isfull_method_return_true_when_stack_is_full) {
+	TStack<int> s(1);
+	s.clear();
+	s.push(1);
+	EXPECT_TRUE(s.isFull());
+}
+TEST(TStack, isfull_method_return_false_when_stack_isnt_full) {
+	TStack<int> s(2);
+	s.clear();
+	s.push(1);
+	EXPECT_FALSE(s.isFull());
+}
+TEST(TStack, isempty_method_return_true_when_stack_is_empty) {
+	TStack<int> s(1);
+	s.clear();
+	EXPECT_TRUE(s.isEmpty());
+}
+TEST(TStack, isempty_method_return_false_when_stack_isnt_empty) {
+	TStack<int> s(3);
+	s.push(1);
+	EXPECT_FALSE(s.isEmpty());
+}
+TEST(TStack, can_get_top) {
+	TStack<int> s(3);
+	s.push(1);
+	ASSERT_NO_THROW(s.top());
+}
+TEST(TStack, push_work_corretly) {
+	TStack<int> s(3);
+	s.clear();
+	s.push(2);
+	EXPECT_EQ(2, s.top());
+}
+TEST(TStack, pop_correct_value) {
+	TStack<int> s(3);
+	s.clear();
+	s.push(3);
+	EXPECT_EQ(3, s.pop());
+}
+TEST(TStack, pop_move_pointer_back) {
+	TStack<int> s(5);
+	s.clear();
+	s.push(3);
+	s.push(2);
+	s.pop();
+	EXPECT_EQ(3, s.top());
+}
+TEST(TStack, can_puch_element_in_full_stack_by_repackaging) {
+	TStack<int> s(2);
+	s.push(2);
+	s.push(4);
+	s.push(6);
+	s.push(8);
+	EXPECT_EQ(8, s.top());
+}
+TEST(TQueue, can_create_queue)
 {
-  ASSERT_NO_THROW(TMatrix<int> m(5));
+	ASSERT_NO_THROW(TQueue<int>s);
 }
 
-TEST(TMatrix, cant_create_too_large_matrix)
+TEST(TQueue, can_push_element_in_queue)
 {
-  ASSERT_ANY_THROW(TMatrix<int> m(MAX_MATRIX_SIZE + 1));
+	TQueue<int> q;
+	ASSERT_NO_THROW(q.push(1));
 }
 
-TEST(TMatrix, throws_when_create_matrix_with_negative_length)
+TEST(TQueue, no_throw_when_push_element_in_full_queue)
 {
-  ASSERT_ANY_THROW(TMatrix<int> m(-5));
+	TQueue<int> q(1);
+	q.push(1);
+	ASSERT_NO_THROW(q.push(2));
 }
 
-TEST(TMatrix, can_create_copied_matrix)
+TEST(TQueue, can_pop_element_from_queue)
 {
-  TMatrix<int> m(5);
-
-  ASSERT_NO_THROW(TMatrix<int> m1(m));
+	TQueue<int> q(5);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	ASSERT_NO_THROW(q.pop());
 }
 
-TEST(TMatrix, copied_matrix_is_equal_to_source_one)
+TEST(TQueue, throws_when_pop_from_empty_queue)
 {
-	TMatrix<int> m1(5);
-	m1[0][0] = 2;
-	m1[3][3] = 3;
-	TMatrix<int> m2(m1);
-	EXPECT_EQ(true, m2 == m1);
+	TQueue<int> q;
+	ASSERT_ANY_THROW(q.pop());
 }
 
-TEST(TMatrix, copied_matrix_has_its_own_memory)
+TEST(TQueue, no_throw_when_many_pushes_and_pops)
 {
-	TMatrix<int> m1(10);
-	TMatrix<int> m2(m1);
-	m2[0][0] = 1000;
-	EXPECT_EQ(m1[0][0], 0);
-	EXPECT_EQ(m2[0][0], 1000);
+	TQueue<int> q(7);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	q.push(4);
+	q.push(5);
+	q.pop();
+	q.push(6);
+	q.pop();
+	q.push(6);
+	q.push(7);
+	ASSERT_NO_THROW(q.pop());
 }
 
-TEST(TMatrix, can_get_size)
+TEST(TQueue, right_algoritm)
 {
-	TMatrix<int> m(5);
-
-	EXPECT_EQ(5, m.GetSize());
+	TQueue<int> q(3);
+	q.push(1);
+	q.push(2);
+	q.push(3);
+	q.pop();
+	q.push(4);
+	q.pop();
+	q.push(8);
+	EXPECT_EQ(8, q[2]);
 }
 
-TEST(TMatrix, can_set_and_get_element)
+TEST(TQueue, can_return_element)
 {
-	TMatrix<int> m(4);
-	m[0][0] = 7;
-
-	EXPECT_EQ(7, m[0][0]);
+	TQueue<int> q(1);
+	q.push(1);
+	ASSERT_NO_THROW(q[0]);
 }
 
-TEST(TMatrix, throws_when_set_element_with_negative_index)
+TEST(TQueue, throws_when_create_queue_with_negative_length)
 {
-	TMatrix<int> m(4);
-
-	ASSERT_ANY_THROW(m[-1][0] = 4);
+	ASSERT_ANY_THROW(TQueue<int> q(-1));
 }
-
-TEST(TMatrix, throws_when_set_element_with_too_large_index)
-{
-	TMatrix<int> m(4);
-
-	ASSERT_ANY_THROW(m[4][4] = 4);
-}
-
-TEST(TMatrix, can_assign_matrix_to_itself)
-{
-	TMatrix<int> m(3);
-
-	ASSERT_NO_THROW(m = m);
-}
-
-TEST(TMatrix, can_assign_matrices_of_equal_size)
-{
-	TMatrix<int> m1(4);
-	TMatrix<int> m2(4);
-
-	ASSERT_NO_THROW(m1 = m2);
-}
-
-TEST(TMatrix, assign_operator_change_matrix_size)
-{
-	TMatrix<int> m1(4);
-	TMatrix<int> m2(6);
-	m2 = m1;
-
-	EXPECT_EQ(4, m2.GetSize());
-}
-
-TEST(TMatrix, can_assign_matrices_of_different_size)
-{
-	TMatrix<int> m1(4);
-	TMatrix<int> m2(6);
-
-	ASSERT_NO_THROW(m1 = m2);
-}
-
-TEST(TMatrix, compare_equal_matrices_return_true)
-{
-
-	TMatrix<int> m1(2);
-	m1[0][0] = 10;
-	m1[0][1] = 20;
-	m1[1][1] = -5;
-	TMatrix<int> m2(2);
-	m2[0][0] = 10;
-	m2[0][1] = 20;
-	m2[1][1] = -5;
-
-	EXPECT_EQ(true, m1 == m2);
-}
-
-TEST(TMatrix, compare_matrix_with_itself_return_true)
-{
-	TMatrix<int> m(4);
-	m[1][1] = 17;
-	m[2][2] = 10;
-	m[3][3] = 5;
-
-	EXPECT_EQ(true, m == m);
-}
-
-TEST(TMatrix, matrices_with_different_size_are_not_equal)
-{
-	TMatrix<int> m1(4);
-	TMatrix<int> m2(5);
-	EXPECT_EQ(!true, m2 == m1);
-}
-
-TEST(TMatrix, can_add_matrices_with_equal_size)
-{
-	TMatrix<int> m1(2);
-	m1[0][0] = 7;
-	m1[0][1] = -6;
-	m1[1][1] = 3;
-	TMatrix<int> m2(2);
-	m2[0][0] = 1;
-	m2[0][1] = 0;
-	m2[1][1] = 8;
-	TMatrix<int> m3(2);
-	m3[0][0] = 8;
-	m3[0][1] = -6;
-	m3[1][1] = 11;
-
-	EXPECT_EQ(m3, m1 + m2);
-}
-
-TEST(TMatrix, cant_add_matrices_with_not_equal_size)
-{
-	TMatrix<int> m1(4);
-	TMatrix<int> m2(5);
-
-	ASSERT_ANY_THROW(m1 + m2);
-}
-
-TEST(TMatrix, can_subtract_matrices_with_equal_size)
-{
-	TMatrix<int> m1(2);
-	m1[0][0] = 10;
-	m1[0][1] = 8;
-	m1[1][1] = 3;
-	TMatrix<int> m2(2);
-	m2[0][0] = 5;
-	m2[0][1] = 1;
-	m2[1][1] = -1;
-	TMatrix<int> m3(2);
-	m3[0][0] = 5;
-	m3[0][1] = 7;
-	m3[1][1] = 4;
-
-	EXPECT_EQ(m3, m1 - m2);
-}
-
-TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
-{
-	TMatrix<int> m1(5);
-	TMatrix<int> m2(6);
-
-	ASSERT_ANY_THROW(m1 - m2);
-}
-

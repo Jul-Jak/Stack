@@ -1,0 +1,6 @@
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/include/CMakeFiles/stack.dir
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/samples/CMakeFiles/samples.dir
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/gtest/CMakeFiles/gtest.dir
+C:/Users/midni/source/repos/Jul-Jak/Stack/build/test/CMakeFiles/test_stack.dir
