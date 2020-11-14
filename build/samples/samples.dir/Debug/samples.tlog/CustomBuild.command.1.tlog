@@ -1,0 +1,10 @@
+^C:\USERS\MIDNI\SOURCE\REPOS\JUL-JAK\STACK\SAMPLES\CMAKELISTS.TXT
+setlocal
+C:\Users\midni\Downloads\cmake-3.18.3-win64-x64\cmake-3.18.3-win64-x64\bin\cmake.exe -SC:/Users/midni/source/repos/Jul-Jak/Stack -BC:/Users/midni/source/repos/Jul-Jak/Stack/build --check-stamp-file C:/Users/midni/source/repos/Jul-Jak/Stack/build/samples/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

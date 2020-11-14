@@ -1,0 +1,14 @@
+﻿  samples.cpp
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(86,1): warning C4244: *=: преобразование "double" в "int", возможна потеря данных
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(83): message : во время компиляции функции-члена класс шаблон "void TStack<char>::push(const T &)"
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(83): message :         with
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(83): message :         [
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(83): message :             T=char
+C:\Users\midni\source\repos\Jul-Jak\Stack\include\utstackx.h(83): message :         ]
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(9): message : выполняется компиляция ссылки на экземпляр шаблон функции "void TStack<char>::push(const T &)"
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(9): message :         with
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(9): message :         [
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(9): message :             T=char
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(9): message :         ]
+C:\Users\midni\source\repos\Jul-Jak\Stack\samples\samples.cpp(7): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "TStack<char>"
+  samples.vcxproj -> C:\Users\midni\source\repos\Jul-Jak\Stack\build\bin\samples.exe
